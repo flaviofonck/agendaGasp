@@ -2,6 +2,44 @@
 
 <script>
 
+    function insertarContacto() 
+    {
+        // Obtenemos los datos del formulario
+        let nombre = document.getElementById('nombre').value;
+        let correo = document.getElementById('correo').value;
+        let telefono = document.getElementById('telefono').value;
+
+        // eliminamos la tabla
+        eliminarTabla();
+        crearLoaderPuntos('divContactos');
+
+        google.script.run
+        .withSuccessHandler(Contactoinsertadocorrectamente)
+        .withFailureHandler(ContactoInsertadoError)
+        .insertarContacto(nombre, correo, telefono);
+    }
+
+    function Contactoinsertadocorrectamente() 
+    {
+        // Limpiar formulario
+        document.getElementById('formulario').reset();
+        // document.getElementById('nombre').value = "";
+        // document.getElementById('correo').value = "";
+        // document.getElementById('telefono').value = "";
+
+        //Mostrar notificacion de error
+        crearNotificacion(NOTIIFCACION_OK, 'Se ha insertado correctamente el contacto', 'Contacto insertado');
+        eliminarLoader();
+        crearTablaContactos();
+    }
+
+    function ContactoInsertadoError(){
+        //Mostrar notificacion de error
+        crearNotificacion(NOTIIFCACION_DANGER, 'No se ha insertado correctamente el contacto', 'Error al insertar contacto');
+        eliminarLoader();
+        crearTablaContactos();
+    }
+
     function crearTablaContactos() 
     {
 
