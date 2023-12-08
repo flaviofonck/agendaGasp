@@ -1,26 +1,17 @@
 <main>
     <!-- Botones superiores-->
     <div class="d-flex justify-content-center my-4">
-        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">
-            Mostrar Contactos
-        </button>
+        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">Mostrar Contactos</button>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary m-2" onclick="abriModalCrearContacto()">
-            Crear Contacto
-        </button>
+        <button type="button" class="btn btn-primary m-2" onclick="abriModalCrearContacto()">Crear Contacto</button>
     </div>
+    <!-- Tabla Contactos -->
     <div class="container col-12 col-lg-6 mb-4 w-50 d-flex justify-content-center" id="divContactos"></div>
 
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="notifiacion" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="toast-header p-0">
-                <div class="icono-notificacion" id="icononotificacion"></div>
-                <strong class="me-auto" id="titulonotificacion"></strong>
-                <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-
-            <div class="toast-body" id="mensajenotificacion"></div>
+    <!-- Notificaciones -->
+    <div class="div-notificaciones position-fixed bottom-0 end-0 p-3">
+        <div class="toast-container" id="contenedorNotificaciones">
+            <!-- Aquí van las notificaciones -->
         </div>
     </div>
 

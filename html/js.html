@@ -4,9 +4,24 @@
 
 <script>
 
-    const NOTIIFCACION_OK = 1;
-    const NOTIIFCACION_DANGER = 2;
-    const NOTIIFCACION_WARNING = 3;
+    //////////////////////
+    // CONSTANTES
+    //////////////////////
+
+    const ICONO_CHECK = 'bi-check2-square';
+    const ICONO_PAPELERA = 'bi-trash';
+    const ICONO_CONTACTO = 'bi-person-plus-fill';
+    const ICONO_ERROR = 'bi-bug';
+    const ICONO_ADVERTENCIA = 'bi-exclamation-square';
+
+    const LOTTIE_CHECK = 'https://assets3.lottiefiles.com/private_files/lf30_dfspihm8.json';
+    const LOTTIE_PAPELERA = 'https://assets8.lottiefiles.com/packages/lf20_WcyRdM.json';
+    const LOTTIE_CONTACTO = 'https://assets1.lottiefiles.com/packages/lf20_sOjs8q/add_contact_05.json';
+    const LOTTIE_ERROR = 'https://assets10.lottiefiles.com/packages/lf20_yw3nyrsv.json';
+    const LOTTIE_PELIGRO = 'https://assets2.lottiefiles.com/packages/lf20_qbuxqwzg.json';
+    const LOTTIE_LOADER_NUBE = 'https://assets8.lottiefiles.com/private_files/lf30_m5jf97io.json';
+    const LOTTIE_LOADER_AVION_PAPEL = 'https://assets7.lottiefiles.com/packages/lf20_x62chJ.json';
+
 
     function insertarContacto() {
         // Obtenemos los datos del formulario
@@ -35,14 +50,14 @@
         // document.getElementById('telefono').value = "";
 
         //Mostrar notificacion de error
-        crearNotificacion(NOTIIFCACION_OK, 'Se ha insertado correctamente el contacto', 'Contacto insertado');
+        crearNotificacionContactos('Se ha insertado correctamente el contacto', 'Contacto insertado');
         eliminarLoader();
         crearTablaContactos();
     }
 
     function ContactoInsertadoError() {
         //Mostrar notificacion de error
-        crearNotificacion(NOTIIFCACION_DANGER, 'No se ha insertado correctamente el contacto', 'Error al insertar contacto');
+        crearNotificacionERROR('No se ha insertado correctamente el contacto', 'Error al insertar contacto');
         eliminarLoader();
         crearTablaContactos();
     }
@@ -74,7 +89,7 @@
 
     function crearTablaContactosError() {
         //Mostrar notificacion de error
-        crearNotificacion(NOTIIFCACION_DANGER, 'No se ha cargado correctamente los datos', 'Error al crear Tabla');
+        crearNotificacionERROR('No se ha cargado correctamente los datos', 'Error al crear Tabla');
         eliminarLoader();
     }
 
@@ -122,7 +137,7 @@
 
         document.getElementById('divContactos').appendChild(tabla);
 
-        crearNotificacion(NOTIIFCACION_OK, 'Se ha creado la tabla correctamente', 'Tabla creada');
+        crearNotificacionOK('Se ha creado la tabla correctamente', 'Tabla creada');
         eliminarLoader();
     }
 
@@ -234,14 +249,14 @@
 
     function ContactoModificadoError() {
         //Mostrar notificacion de error
-        crearNotificacion(NOTIIFCACION_DANGER, 'No se ha modificado correctamente el contacto', 'Error al modificar contacto');
+        crearNotificacionERROR('No se ha modificado correctamente el contacto', 'Error al modificar contacto');
         eliminarLoader();
         crearTablaContactos();
     }
 
     function ContactoModificadocorrectamente() {
         //Mostrar notificacion 
-        crearNotificacion(NOTIIFCACION_OK, 'Se ha modificado correctamente el contacto', 'Contacto modificado');
+        crearNotificacionContactos('Se ha modificado correctamente el contacto', 'Contacto modificado');
         eliminarLoader();
         crearTablaContactos();
     }
@@ -259,52 +274,16 @@
 
     function ContactoBorrardocorrectamente() {
         //Mostrar notificacion 
-        crearNotificacion(NOTIIFCACION_OK, 'Se ha borrado correctamente el contacto', 'Contacto borrado');
+        crearNotificacionContactos('Se ha borrado correctamente el contacto', 'Contacto borrado');
         eliminarLoader();
         crearTablaContactos();
     }
 
     function ContactoBorradoError() {
         //Mostrar notificacion de error
-        crearNotificacion(NOTIIFCACION_DANGER, 'No se ha borrado correctamente el contacto', 'Error al borrar contacto');
+        crearNotificacionERROR('No se ha borrado correctamente el contacto', 'Error al borrar contacto');
         eliminarLoader();
         crearTablaContactos();
-    }
-
-    function crearNotificacion(tipo, mensaje, titulo) {
-        let mensajeNotificacion = document.getElementById('mensajenotificacion');
-        let tituloNotificacion = document.getElementById('titulonotificacion');
-        let elementnotificacion = document.getElementById('notifiacion');
-        let icononotificacion = document.getElementById('icononotificacion');
-        let notificacion = bootstrap.Toast.getOrCreateInstance(elementnotificacion);
-
-        // Editar notificacion
-        mensajeNotificacion.textContent = mensaje;
-        tituloNotificacion.textContent = titulo;
-
-        switch (tipo) {
-            case NOTIIFCACION_OK:
-                elementnotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-verde-oscuro');
-                icononotificacion.className = '';
-                icononotificacion.classList.add('bi', 'bi-check2-square');
-                break;
-            case NOTIIFCACION_DANGER:
-                elementnotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-rojo-oscuro');
-                icononotificacion.className = '';
-                icononotificacion.classList.add('bi', 'bi-bug');
-                break;
-            case NOTIIFCACION_WARNING:
-                elementnotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-amarillo-oscuro');
-                icononotificacion.className = '';
-                icononotificacion.classList.add('bi', 'bi-exclamation-square');
-                break;
-            default:
-                break;
-        }
-
-
-        // Mostrar notificacion
-        notificacion.show();
     }
 
     function crearLoader(elementoPadre) {
